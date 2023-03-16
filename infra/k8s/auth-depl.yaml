@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: colakkemree/auth
+          image: us.gcr.io/ticketapp-dev-380717/auth
 ---
 apiVersion: v1
 kind: Service
