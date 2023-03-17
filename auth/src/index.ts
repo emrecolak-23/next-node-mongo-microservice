@@ -1,5 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import 'express-async-errors'
 
 import { currentUserRouter } from './routes/current-user'
 import {singinRouter} from './routes/signin'
