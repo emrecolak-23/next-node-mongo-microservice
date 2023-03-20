@@ -1,12 +1,15 @@
-const LandingPage = ({ color }) => {
-  console.log('I am in the component', color);
+import buildClient from '../api/build-client';
+
+const LandingPage = ({ currentUser }) => {
+  console.log(currentUser);
   return <div>Landing23</div>;
 };
 
-LandingPage.getInitialProps = () => {
-  console.log('I am on the server');
+LandingPage.getInitialProps = async (context) => {
+  const client = buildClient(context);
+  const { data } = await client.get('/api/users/currentuser');
 
-  return { color: 'red' };
+  return data;
 };
 
 export default LandingPage;
