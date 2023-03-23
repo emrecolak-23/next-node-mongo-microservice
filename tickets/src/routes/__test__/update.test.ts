@@ -91,6 +91,7 @@ it('update the ticket provided valid inputs', async () => {
     const ticketResponse = await request(app)
                                     .get(`/api/tickets/${response.body.id}`)
                                     .send()
+                                    
     expect(ticketResponse.body.title).toEqual('New York Fashion Week')
     expect(ticketResponse.body.price).toEqual(30)
 })
