@@ -10,8 +10,13 @@ const stan = nats.connect('ticketing', randomBytes(4).toString('hex'), {
 stan.on('connect', () => {
     console.log('Listener connected on Nats')
 
-    const options = stan.subscriptionOptions().setManualAckMode(true)
-    const subscription = stan.subscribe('ticket:created', 'orders-service-queue-group', options)
+    stan.on('close', () => {
+        console.log('Nats connection closed')
+        process.exit()
+    })
+
+    const options = stan.subscriptionOptions().setManualAckMode(true).setDeliverAllAvailable().setDurableName('order-service')
+    const subscription = stan.subscribe('ticket:created', 'queue-group-name', options)
 
     subscription.on('message', (msg:Message) => {
         const data = msg.getData()
@@ -24,3 +29,6 @@ stan.on('connect', () => {
         msg.ack()
     })
 })
+
+process.on('SIGINT', () => stan.close())
+process.on('SIGTERM', () => stan.close())
