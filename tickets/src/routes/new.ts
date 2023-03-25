@@ -29,7 +29,8 @@ router.post('/api/tickets', requireAuth, [
         price: ticket.price,
         userId: ticket.userId
     })
-
+  
+  
     res.status(201).send(ticket)
 })
 
