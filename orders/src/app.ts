@@ -12,11 +12,6 @@ const app = express()
 app.set('trust proxy', true)
 app.use(express.json())
 
-app.use(indexOrderRouter)
-app.use(deleteOrderRouter)
-app.use(newOrderRouter)
-app.use(showOrderRouter)
-
 app.use(
     cookieSession({
         signed: false,
@@ -24,6 +19,10 @@ app.use(
     })
 )
 app.use(currentUser)
+app.use(indexOrderRouter)
+app.use(deleteOrderRouter)
+app.use(newOrderRouter)
+app.use(showOrderRouter)
 
 
 app.all('*', async (req, res, next) => {
