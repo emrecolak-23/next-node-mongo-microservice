@@ -3,17 +3,17 @@ import { OrderStatus } from "@emticketsapp/common";
 import { TicketDoc } from "./ticket";
 
 interface OrderAttrs {
-    userId: string,
-    status: OrderStatus,
-    expiresAt: Date,
-    ticket: TicketDoc
+    userId: string;
+    status: OrderStatus;
+    expiresAt: Date;
+    ticket: TicketDoc;
 }
 
 interface OrderDoc extends mongoose.Document {
-    userId: string,
-    status: OrderStatus,
-    expiresAt: Date,
-    ticket: TicketDoc
+    userId: string;
+    status: OrderStatus;
+    expiresAt: Date;
+    ticket: TicketDoc;
 }
 
 interface OrderModel extends mongoose.Model<OrderDoc> {
