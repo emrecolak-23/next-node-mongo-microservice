@@ -1,6 +1,6 @@
 import express, {Request, Response} from 'express'
 import {body} from 'express-validator'
-import { validateRequest, NotFoundError, requireAuth, NotAuthorizedError } from '@emticketsapp/common'
+import { validateRequest, NotFoundError, requireAuth, NotAuthorizedError, BadRequestError } from '@emticketsapp/common'
 import { Ticket } from '../models/ticket'
 import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher'
 import { natsWrapper } from '../nats-wrapper'
@@ -21,6 +21,10 @@ validateRequest
     const ticket = await Ticket.findById(req.params.id)
     if(!ticket) {
         throw new NotFoundError()
+    }
+
+    if(ticket.orderId) {
+        throw new BadRequestError('Cannot edit a reserved ticket')
     }
 
     if(ticket.userId !== req.currentUser!.id) {
