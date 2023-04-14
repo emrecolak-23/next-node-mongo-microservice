@@ -68,7 +68,7 @@ it('emit an order created event', async () => {
             .post('/api/orders')
             .set('Cookie', signin())
             .send({ticketId: ticket.id})
-            .expect(201)
+            .expect(201) 
     
     expect(natsWrapper.client.publish).toHaveBeenCalled()
 })

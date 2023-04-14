@@ -6,6 +6,7 @@ import { errorHandler, NotFoundError, currentUser } from '@emticketsapp/common'
 import { newChargeRouter } from './routes/new'
 
 
+
 const app = express()
 app.set('trust proxy', true)
 app.use(express.json())
