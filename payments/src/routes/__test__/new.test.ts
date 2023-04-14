@@ -1,10 +1,11 @@
 import request from 'supertest'
 import { app } from '../../app'
-import mongoose, { mongo } from 'mongoose'
+import mongoose from 'mongoose'
 import { Order } from '../../models/order'
 import { OrderStatus } from '@emticketsapp/common'
 import { stripe } from '../../stripe'
 import { Payment } from '../../models/payment'
+
 
 
 it('returns a 404 when purchasing an order that does not exist', async () => {
@@ -96,6 +97,7 @@ it('returns a 400 when purchasing a cancelled order', async () => {
 // })
 
 /** Automated testing with realistic way **/
+
 it('returs a 201 with valid inputs', async () => {
     const userId = new mongoose.Types.ObjectId().toHexString()
     const price = Math.floor(Math.random() * 100000)
@@ -133,5 +135,6 @@ it('returs a 201 with valid inputs', async () => {
     })
 
     expect(payment).not.toBeNull()
+
 })
 

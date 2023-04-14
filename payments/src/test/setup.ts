@@ -2,8 +2,7 @@ import {MongoMemoryServer} from 'mongodb-memory-server'
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
-
-dotenv.config()
+ 
 
 declare global {
     var signin: (id?: string) => string[];
@@ -15,6 +14,7 @@ let mongo: any
 beforeAll(async () => {
 
     process.env.JWT_KEY='asfdfkdfs'
+    dotenv.config()
     mongo = await MongoMemoryServer.create()
     const mongoUri = mongo.getUri()
 
@@ -42,7 +42,6 @@ global.signin = (id?: string) => {
         id: id || new mongoose.Types.ObjectId().toHexString(),
         email: 'colakkemre@gmail.com'
     }
-
     // Create the JWT!
     const token = jwt.sign(payload, process.env.JWT_KEY!)
     // Build session object {jwt: MY_JWT}
