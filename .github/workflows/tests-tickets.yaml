@@ -1,6 +1,9 @@
-name: tests
+name: tests-tickets
 
-on: pull_request
+on:
+  pull_request:
+    paths:
+      - 'tickets/**'
 
 jobs:
   build:
@@ -9,4 +12,4 @@ jobs:
       - uses: actions/checkout@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: cd auth && npm install && npm run test:ci
+      - run: cd tickets && npm install && npm run test:ci
